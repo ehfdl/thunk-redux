@@ -1,46 +1,22 @@
-// id = uuidv4(),  input = form, preventdefault 사용.
-
-import React, { useState } from "react";
 import styled from "styled-components";
-
-import axios from "axios";
+import useInput from "../hooks/useInput";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../redux/module/todosSlice";
 
 const Input = () => {
-  const [todo, setTodo] = useState({
-    title: "",
-    content: "",
-  });
-  const onSubmitHandler = (todo) => {
-    axios.post("http://localhost:3001/todos", todo);
+  const dispatch = useDispatch();
+  const [title, onChangeTitle] = useInput("");
+  const [content, onChangeContent] = useInput("");
+
+  const onClickAddTodo = (event) => {
+    // event.preventDefault();
+    dispatch(addTodo({ title, content }));
   };
 
   return (
-    <InputContainer
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmitHandler(todo);
-      }}
-    >
-      <InputBox
-        type="text"
-        onChange={(ev) => {
-          const { value } = ev.target;
-          setTodo({
-            ...todo,
-            title: value,
-          });
-        }}
-      />
-      <InputBox
-        type="text"
-        onChange={(ev) => {
-          const { value } = ev.target;
-          setTodo({
-            ...todo,
-            content: value,
-          });
-        }}
-      />
+    <InputContainer onSubmit={onClickAddTodo}>
+      <InputBox type="text" value={title} onChange={onChangeTitle} />
+      <InputBox type="text" value={content} onChange={onChangeContent} />
       <Button>추가하기</Button>
     </InputContainer>
   );

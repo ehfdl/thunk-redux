@@ -22,7 +22,19 @@ export const __getTodos = createAsyncThunk(
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
-  reducers: {},
+  reducers: {
+    addTodo: (state, action) => {
+      const todo = {
+        title: action.payload.title,
+        content: action.payload.content,
+      };
+      axios.post("http://localhost:3001/todos", todo);
+    },
+    deleteTodo: (state, action) => {
+      console.log(action.payload);
+      axios.delete(`http://localhost:3001/todos/${action.payload}`);
+    },
+  },
   extraReducers: {
     [__getTodos.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
@@ -38,5 +50,5 @@ export const todosSlice = createSlice({
   },
 });
 
-export const {} = todosSlice.actions;
+export const { addTodo, deleteTodo } = todosSlice.actions;
 export default todosSlice.reducer;
