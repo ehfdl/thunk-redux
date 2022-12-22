@@ -1,16 +1,21 @@
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../redux/module/todosSlice";
+import { __addTodo } from "../redux/module/todosSlice";
 
 const Input = () => {
   const dispatch = useDispatch();
   const [title, onChangeTitle] = useInput("");
   const [content, onChangeContent] = useInput("");
 
+  const todo = {
+    title: title,
+    content: content,
+  };
+
   const onClickAddTodo = (event) => {
-    // event.preventDefault();
-    dispatch(addTodo({ title, content }));
+    event.preventDefault();
+    dispatch(__addTodo(todo));
   };
 
   return (
