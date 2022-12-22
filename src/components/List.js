@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getTodos } from "../redux/module/todosSlice";
 import styled from "styled-components";
-import { deleteTodo } from "../redux/module/todosSlice";
+import { __deleteTodo } from "../redux/module/todosSlice";
 
 const List = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ const List = () => {
     return <div>{error.message}</div>;
   }
 
-  const onClickDeleteButtonHandler = (todoId) => {
-    dispatch(deleteTodo(todoId));
+  const onClickDeleteButtonHandler = (Id) => {
+    dispatch(__deleteTodo(Id));
   };
 
   return (
@@ -32,7 +32,10 @@ const List = () => {
         <TodoBox key={todo.id}>
           <TodoTitle>{todo.title}</TodoTitle>
           <TodoText>{todo.content}</TodoText>
-          <Button onClick={() => onClickDeleteButtonHandler(todo.id)}>
+          <Button
+            type="button"
+            onClick={() => onClickDeleteButtonHandler(todo.id)}
+          >
             삭제하기
           </Button>
         </TodoBox>
@@ -60,7 +63,7 @@ const P = styled.p`
   font-size: x-large;
   font-weight: bold;
 `;
-const TodoBox = styled.form`
+const TodoBox = styled.div`
   display: inline-block;
   width: 253px;
   min-height: 120px;
