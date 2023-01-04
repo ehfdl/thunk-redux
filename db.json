@@ -6,11 +6,6 @@
       "content": "json-server를 배워봅시다."
     },
     {
-      "title": "재밋네",
-      "content": "ㄴㅁ이럼ㄴㅇ",
-      "id": 12
-    },
-    {
       "title": "정말 ",
       "content": "재밌어요 이게?",
       "id": 28
@@ -24,6 +19,11 @@
       "title": "zdf",
       "content": "zsdfefef",
       "id": 30
+    },
+    {
+      "title": "sdfdf",
+      "content": "sdfdf",
+      "id": 31
     }
   ]
 }

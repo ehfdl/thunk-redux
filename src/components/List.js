@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import styled from "styled-components";
-import { __deleteTodo } from "../hooks/useTodo";
 import useGetTodo from "../hooks/useGetTodo";
+import useDeleteTodo from "../hooks/useDeleteTodo";
 
 const List = () => {
-  const dispatch = useDispatch();
-
   const [isLoading, error, todos] = useGetTodo();
+  const [onClickDeleteButtonHandler] = useDeleteTodo();
 
   if (isLoading) {
     return <div>로딩 중....</div>;

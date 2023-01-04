@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { __getTodos } from "./useTodo";
+import { __getTodos } from "../redux/module/todosSlice";
 
 const useGetTodo = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,5 @@
-import React from "react";
 import { useDispatch } from "react-redux";
-import { __deleteTodo } from "./useTodo";
+import { __deleteTodo } from "../redux/module/todosSlice";
 
 const useDeleteTodo = () => {
   const dispatch = useDispatch();
@@ -8,7 +7,7 @@ const useDeleteTodo = () => {
   const onClickDeleteButtonHandler = (Id) => {
     dispatch(__deleteTodo(Id));
   };
-  return <div></div>;
+  return [onClickDeleteButtonHandler];
 };
 
 export default useDeleteTodo;
