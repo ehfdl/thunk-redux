@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { __getTodos } from "../redux/module/todosSlice";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { __deleteTodo } from "../redux/module/todosSlice";
+import { __deleteTodo } from "../hooks/useTodo";
+import useGetTodo from "../hooks/useGetTodo";
 
 const List = () => {
   const dispatch = useDispatch();
-  const { isLoading, error, todos } = useSelector((state) => state.todos);
 
-  useEffect(() => {
-    dispatch(__getTodos());
-  }, [dispatch]);
+  const [isLoading, error, todos] = useGetTodo();
 
   if (isLoading) {
     return <div>로딩 중....</div>;
@@ -19,10 +16,6 @@ const List = () => {
   if (error) {
     return <div>{error.message}</div>;
   }
-
-  const onClickDeleteButtonHandler = (Id) => {
-    dispatch(__deleteTodo(Id));
-  };
 
   return (
     <ListContainer>
@@ -38,6 +31,13 @@ const List = () => {
           >
             삭제하기
           </Button>
+          <div>댓글</div>
+          {todo.comment?.map((t) => (
+            <div key={t.id}>
+              <div>{t.title}</div>
+              <div>{t.content}</div>
+            </div>
+          ))}
         </TodoBox>
       ))}
     </ListContainer>
