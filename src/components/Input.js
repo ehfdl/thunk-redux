@@ -1,27 +1,26 @@
 import styled from "styled-components";
-import useInput from "../hooks/useInput";
-import { useDispatch } from "react-redux";
-import { __addTodo } from "../redux/module/todosSlice";
+import useForm from "../hooks/useForm";
 
 const Input = () => {
-  const dispatch = useDispatch();
-  const [title, onChangeTitle] = useInput("");
-  const [content, onChangeContent] = useInput("");
-
-  const todo = {
-    title: title,
-    content: content,
-  };
-
-  const onClickAddTodo = (event) => {
-    event.preventDefault();
-    dispatch(__addTodo(todo));
-  };
+  const [formValue, handleFormValueChange, handleFormValueSubmit] = useForm({
+    title: "",
+    content: "",
+  });
 
   return (
-    <InputContainer onSubmit={onClickAddTodo}>
-      <InputBox type="text" value={title} onChange={onChangeTitle} />
-      <InputBox type="text" value={content} onChange={onChangeContent} />
+    <InputContainer onSubmit={handleFormValueSubmit}>
+      <InputBox
+        type="text"
+        name="title"
+        value={formValue.title}
+        onChange={handleFormValueChange}
+      />
+      <InputBox
+        type="text"
+        name="content"
+        value={formValue.content}
+        onChange={handleFormValueChange}
+      />
       <Button>추가하기</Button>
     </InputContainer>
   );

@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
@@ -6,7 +7,6 @@ const initialState = {
   isLoading: false,
   error: null,
 };
-
 export const __getTodos = createAsyncThunk(
   "GET_TODOS",
   async (payload, thunkAPI) => {
@@ -18,7 +18,6 @@ export const __getTodos = createAsyncThunk(
     }
   }
 );
-
 export const __addTodo = createAsyncThunk(
   "ADD_TODO",
   async (payload, thunkAPI) => {
